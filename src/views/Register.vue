@@ -8,7 +8,7 @@
                 </div>
                 <v-form
                 class="form"
-                @submit.prevent="login()"
+                @submit.prevent="register()"
                 lazy-validation
                 >
                 
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import auth from '@/logic/auth.js'
 export default {
     name: 'Register',
     data(){
@@ -54,9 +55,16 @@ export default {
         }
     },
     methods:{
-        login(){
+        async register(){
+            try{
+                const response = await auth.register(this.validation.email, this.validation.password)
+                console.log(response)
+                this.$router.push('/')
+            }
+            catch(err){
+                console.log(err)
+            }
             
-            console.log(this.validation)
         }
     }
 }
