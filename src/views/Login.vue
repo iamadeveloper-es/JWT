@@ -54,6 +54,8 @@ export default {
             try{
                 const response = await auth.login(this.validation.email, this.validation.password)
                 console.log(response)
+                const email = this.validation.email
+                auth.setUserLogged(email)
                 this.$router.push('/')
             }
             catch(err){
