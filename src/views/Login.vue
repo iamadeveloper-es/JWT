@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import auth from '@/logic/auth.js'
 export default {
     name: 'Login',
     data(){
@@ -49,9 +50,17 @@ export default {
         }
     },
     methods:{
-        login(){
-            this.error = true
-            console.log(this.validation)
+        async login(){
+            try{
+                const response = await auth.login(this.validation.email, this.validation.password)
+                console.log(response)
+                this.$router.push('/')
+            }
+            catch(err){
+                console.log(err)
+                this.error = true
+            }
+            
         }
     }
 }
